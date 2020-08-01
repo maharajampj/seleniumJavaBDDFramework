@@ -9,7 +9,7 @@ public   class setUp
 	{
 		Properties prop = new Properties();
 		try {
-			String envPath = System.getProperty("user.dir") + "src\\main\\resources\\env.properties";
+			String envPath = System.getProperty("user.dir") + "\\src\\main\\resources\\env.properties";
 
 			FileReader reader = new FileReader(envPath);
 			prop.load(reader);

@@ -6,7 +6,7 @@
 	<artifactId>seleniumJavaBDDFramework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<cucumber.version>5.7.0</cucumber.version>
+		<cucumber.version>4.7.2</cucumber.version>
 		<aspectj.version>1.8.10</aspectj.version>
 		<selenium.version>3.141.59</selenium.version>
 		<aspectj.version>1.8.10</aspectj.version>
@@ -43,7 +43,19 @@
 			<artifactId>allure-cucumber4-jvm</artifactId>
 			<version>2.12.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.13</version>
+		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>

@@ -3,7 +3,19 @@ package com.qa.common;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import javax.swing.tree.RowMapper;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -13,6 +25,7 @@ import com.qa.utility.util;
 public class components extends util
 {
 	ui ui=new ui();
+	
 
 	public void scrollToElement(WebElement element)
 	{
@@ -29,6 +42,57 @@ public class components extends util
 	public void CompareUrl(String url)
 	{
 		Assert.assertEquals(driver.getCurrentUrl(), url, "The URL is not matching");
+	}
+	public void CompareTitle(String title)
+	{
+
+		Set<String> windows=driver.getWindowHandles();
+		for(String window:windows)
+		{
+			driver.switchTo().window(window);
+			if(driver.getTitle().contains(title))
+			{
+			  System.out.println("Title matches");
+			}
+		}
+
+		
+	}
+	public List<String> getTestData(String sheetName,String coloumnName) throws IOException
+	{
+		    List<String> list=new ArrayList<String>();
+		    FileInputStream file = new FileInputStream(new File(resouceTestDataPath));
+	        XSSFWorkbook workbook = new XSSFWorkbook(file);
+	        XSSFSheet sheet = workbook.getSheet(sheetName);
+	        XSSFRow row = sheet.getRow(0);
+	        int minColIx = row.getFirstCellNum(); 
+	        int maxColIx = row.getLastCellNum(); 
+	        int minRowIx=sheet.getFirstRowNum();
+	        int maxRowIx=sheet.getLastRowNum();
+	        
+	        for(int colIx=minColIx; colIx<=maxColIx; colIx++) 
+	        { 
+	        	   XSSFCell cell = row.getCell(colIx); 
+	        	if (cell != null) 
+	        	{
+	        	   if(cell.getStringCellValue().trim().equals(coloumnName))
+	        	   {
+	        		   int cellId=cell.getColumnIndex();
+					
+					 for(int rowIx=minRowIx+1;rowIx<=maxRowIx;rowIx++) 
+					 {
+						 XSSFCell cell1=sheet.getRow(rowIx).getCell(cellId);
+						 list.add(cell1.getStringCellValue());
+					  
+					 }
+					 
+					 
+	        	   }
+	        	}
+	        	 
+	        }
+	        workbook.close();
+	        return list;
 	}
 	public void pressEnter() 
 	{

@@ -7,23 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.qa.common.ui;
 
-public class landingPage 
+public class contactUsPage 
 {
-
 	 WebDriver driver;
-     ui ui =new ui();
-     
-	public landingPage(WebDriver driver) 
+      ui ui =new ui();
+      
+	public contactUsPage(WebDriver driver) 
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
-	@FindBy(xpath = "//a[@id='contact-us']")
-	public  WebElement contactUsBtn;
-	
-	public void ClickContactUs() 
-	{
-		ui.click(contactUsBtn);
-	}
+	@FindBy(xpath = "//ul[@class='navbar-nav side-navbar']")
+	public  WebElement sideNavBar;
 
 }

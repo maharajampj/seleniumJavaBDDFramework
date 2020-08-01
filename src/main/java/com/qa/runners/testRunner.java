@@ -5,11 +5,13 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.qa.utility.setUp;
+
+import io.cucumber.testng.CucumberFeatureWrapper;
 import io.cucumber.testng.CucumberOptions;
-import io.cucumber.testng.Pickle;
+import io.cucumber.testng.PickleEventWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
-@CucumberOptions( features = "src/main/resources/com/features",
+@CucumberOptions( features = "src/main/resources/com/features",monochrome = true,
 
 glue = { "com.qa.stepDefinitions" },
 
@@ -32,9 +34,9 @@ public class testRunner
         set.envSetUp();
 	}
 	@Test(dataProvider = "scenarios")
-	public void scenario(Pickle pickle) throws Throwable 
+	public void scenario(PickleEventWrapper pickle,CucumberFeatureWrapper feature) throws Throwable 
 	{
-		testNGCucumberRunner.runScenario(pickle);
+		testNGCucumberRunner.runScenario(pickle.getPickleEvent());
 	}
 	
 	@DataProvider()
