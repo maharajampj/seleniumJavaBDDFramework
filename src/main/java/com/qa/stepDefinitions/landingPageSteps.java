@@ -26,7 +26,7 @@ public class landingPageSteps
 	@Before()
 	public void launchApp()
 	{
-		driver=Util.launchBrowser(prop.getProperty("browser"));
+		driver=Util.launchBrowser();
 	}
 
 	@Given("^I am on the landing page$")
