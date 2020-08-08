@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,10 +21,9 @@ public class util {
 	}
 
 	public WebDriver launchBrowser()
-	{		String browser=prop.getProperty("browser");
+	{		
+		String browser=prop.getProperty("browser");
 		String emulator=prop.getProperty("emulator");
-		String width=prop.getProperty("device_width");
-		String height=prop.getProperty("device_height");
 
 		switch (browser) 
 		{
@@ -32,7 +32,14 @@ public class util {
 		    ChromeOptions chromeOptions = new ChromeOptions();
 			if(emulator!=null)
 			{
-				if(!emulator.equals("Custom"))
+				
+				int width=Integer.parseInt(prop.getProperty("device_width"));
+				int height=Integer.parseInt(prop.getProperty("device_height"));
+				int pixelRatio=Integer.parseInt(prop.getProperty("device_pixelRatio"));
+				String userAgent=prop.getProperty("device_userAgent");
+				try {
+			
+				if(!emulator.equalsIgnoreCase("Custom"))
 				{
 				Map<String, Object> mobileEmulation = new HashMap<>();
 			    mobileEmulation.put("deviceName", emulator);
@@ -40,14 +47,17 @@ public class util {
 			    driver=new ChromeDriver(chromeOptions);
 			    driver.manage().window().maximize();
 				}
-				else if(emulator.equals("Custom"))
+				else if(emulator.equalsIgnoreCase("Custom"))
 				{
 				    Map<String, Object> deviceMetrics = new HashMap<>();
 					Map<String, Object> mobileEmulation = new HashMap<>();
+					
 				    deviceMetrics.put("width", width);
 				    deviceMetrics.put("height", height);
-				    deviceMetrics.put("user-agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1");
+				    deviceMetrics.put("pixelRatio", pixelRatio);
 				    mobileEmulation.put("deviceMetrics", deviceMetrics);
+				    mobileEmulation.put("user-agent", userAgent);
+				    
 				    chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
  				    driver = new ChromeDriver(chromeOptions);
 				    driver.manage().window().maximize();
@@ -57,11 +67,16 @@ public class util {
 				{
 					System.out.println("Emulator not found");
 				}
+				}
+				catch(InvalidArgumentException e)
+				{
+					System.out.println("Invalid Device Name "+e.getMessage());
+				}
 
 			}
 			else if(emulator==null)
 			{
-			    driver=new ChromeDriver(chromeOptions);
+			    driver=new ChromeDriver();
 			    driver.manage().window().maximize();
 			}
 			break;
