@@ -58,42 +58,7 @@ public class components extends util
 
 		
 	}
-	public List<String> getTestData(String sheetName,String coloumnName) throws IOException
-	{
-		    List<String> list=new ArrayList<String>();
-		    FileInputStream file = new FileInputStream(new File(resouceTestDataPath));
-	        XSSFWorkbook workbook = new XSSFWorkbook(file);
-	        XSSFSheet sheet = workbook.getSheet(sheetName);
-	        XSSFRow row = sheet.getRow(0);
-	        int minColIx = row.getFirstCellNum(); 
-	        int maxColIx = row.getLastCellNum(); 
-	        int minRowIx=sheet.getFirstRowNum();
-	        int maxRowIx=sheet.getLastRowNum();
-	        
-	        for(int colIx=minColIx; colIx<=maxColIx; colIx++) 
-	        { 
-	        	   XSSFCell cell = row.getCell(colIx); 
-	        	if (cell != null) 
-	        	{
-	        	   if(cell.getStringCellValue().trim().equals(coloumnName))
-	        	   {
-	        		   int cellId=cell.getColumnIndex();
-					
-					 for(int rowIx=minRowIx+1;rowIx<=maxRowIx;rowIx++) 
-					 {
-						 XSSFCell cell1=sheet.getRow(rowIx).getCell(cellId);
-						 list.add(cell1.getStringCellValue());
-					  
-					 }
-					 
-					 
-	        	   }
-	        	}
-	        	 
-	        }
-	        workbook.close();
-	        return list;
-	}
+	
 	public void pressEnter() 
 	{
 		try

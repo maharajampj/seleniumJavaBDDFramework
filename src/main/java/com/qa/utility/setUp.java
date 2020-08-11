@@ -13,7 +13,6 @@ public   class setUp
 
 			FileReader reader = new FileReader(envPath);
 			prop.load(reader);
-			System.out.println(prop);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

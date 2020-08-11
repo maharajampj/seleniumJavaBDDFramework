@@ -3,9 +3,11 @@ package com.qa.stepDefinitions;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 
 import com.qa.common.components;
+import com.qa.common.readData;
 import com.qa.pageObjects.landingPage;
 import com.qa.utility.setUp;
 import com.qa.utility.util;
@@ -20,26 +22,28 @@ public class landingPageSteps
 	Properties prop=setUp.envSetUp();
 	util Util=new util();
 	components Components=new components();
+	readData data=new readData();
 	WebDriver driver;
 	
 	
 	@Before()
 	public void launchApp()
 	{
-		driver=Util.launchBrowser();
+		//driver=Util.launchBrowser();
 	}
 
 	@Given("^I am on the landing page$")
 	public void launchLandingPage()
 	{
-    	Components.loadApp(prop.getProperty("appUrl"));
+    	//Components.loadApp(prop.getProperty("appUrl"));
 
 	}
 	@Then("^I should see the \\\"([^\\\"]*)\\\" title$")
-	public void validateTitle(String url) throws IOException 
+	public void validateTitle(String url) throws IOException, ParseException 
 	{
-		Components.CompareTitle(url);
-		System.out.println(Components.getTestData("contactUs", "EmailAddress"));
+		//Components.CompareTitle(url);
+		//System.out.println(data.getExcelTestData("contactUs", "EmailAddress"));
+		System.out.println(data.getJSONTestData("dependencies"));
 	}
 	@Then("^I should navigate to contactUs from$")
 	public void navigateToContactUs()
@@ -50,7 +54,7 @@ public class landingPageSteps
 	@After()
 	public void killApp()
 	{
-		Util.killBrowser();
+		//Util.killBrowser();
 	}
 	
 }

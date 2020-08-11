@@ -11,13 +11,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class util {
 	public static String resourceDriverPath = null;
-	public static String resouceTestDataPath = null;
+	public static String resouceExcelTestDataPath = null;
+	public static String resourceJSONTestDataPath = null;
 	public static WebDriver driver;
 	Properties prop = setUp.envSetUp();
 
 	public util() {
 		resourceDriverPath = System.getProperty("user.dir") + "//src//main//resources//drivers//";
-		resouceTestDataPath = System.getProperty("user.dir") + "//TestData//Data.xlsx";
+		resouceExcelTestDataPath = System.getProperty("user.dir") + "//TestData//Data.xlsx";
+		resourceJSONTestDataPath=System.getProperty("user.dir") + "//TestData//Data.json";
 	}
 
 	public WebDriver launchBrowser()
