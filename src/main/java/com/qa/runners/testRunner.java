@@ -15,7 +15,7 @@ import io.cucumber.testng.TestNGCucumberRunner;
 
 glue = { "com.qa.stepDefinitions" },
 
-tags = { "@EmulatorTest" },
+tags = { "@Test" },
 plugin = {
 
 		"pretty",

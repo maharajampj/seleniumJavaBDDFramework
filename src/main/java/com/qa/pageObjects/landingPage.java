@@ -24,7 +24,8 @@ public class landingPage
 	public void ClickContactUs() 
 	{
 		ui.click(contactUsBtn);
-		}
+		
+	}
 
 
 }

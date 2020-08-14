@@ -1,5 +1,7 @@
 package com.qa.reports;
 
-public class allureReport {
+public class allureReport 
+{
 
+	
 }

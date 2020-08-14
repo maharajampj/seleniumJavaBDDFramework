@@ -22,76 +22,73 @@ import org.testng.Assert;
 
 import com.qa.utility.util;
 
-public class components extends util
-{
-	ui ui=new ui();
-	
+public class components extends util {
+	ui ui = new ui();
 
-	public void scrollToElement(WebElement element)
-	{
+	public void scrollToElement(WebElement element) {
 		if (ui.isDisplayed(element)) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(true);", element);
 		}
 	}
-	
-	public void loadApp(String url)
-	{
+
+	public void loadApp(String url) {
 		driver.get(url);
 	}
-	public void CompareUrl(String url)
-	{
+
+	public void CompareUrl(String url) {
 		Assert.assertEquals(driver.getCurrentUrl(), url, "The URL is not matching");
 	}
-	public void CompareTitle(String title)
-	{
 
-		Set<String> windows=driver.getWindowHandles();
-		for(String window:windows)
+	public void CompareTitle(String title) {
+
+		if (driver.getTitle().contains(title)) 
 		{
-			driver.switchTo().window(window);
-			if(driver.getTitle().contains(title))
-			{
-			  System.out.println("Title matches");
-			}
+			System.out.println("Title matches :"+title);
+		}
+		else
+		{
+			Assert.fail("Title is not matching");
 		}
 
-		
 	}
 	
-	public void pressEnter() 
+	public void switchLastWindow()
 	{
-		try
-		{
-		Robot robot = new Robot();
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		}
-		catch(Exception e)
-		{
+		List<String> windows=new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(windows.get(windows.size()-1));
+		//driver.switchTo().window(windows.get(0));
+	}
+
+	public void pressEnter() {
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public void pressTab() throws AWTException  {
+	public void pressTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_TAB);
 	}
 
-	public  void pressDownArrow() throws AWTException {
+	public void pressDownArrow() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_DOWN);
 		robot.keyRelease(KeyEvent.VK_DOWN);
 	}
 
-	public  void pressLeftArrow() throws AWTException {
+	public void pressLeftArrow() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_LEFT);
 		robot.keyRelease(KeyEvent.VK_LEFT);
 	}
 
-	public  void openDuplicateTab() throws AWTException, InterruptedException {
+	public void openDuplicateTab() throws AWTException, InterruptedException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_F6);
 		robot.keyRelease(KeyEvent.VK_F6);
@@ -99,7 +96,7 @@ public class components extends util
 		robot.keyPress(KeyEvent.VK_ENTER);
 	}
 
-	public  void closeTab() throws AWTException {
+	public void closeTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_W);
@@ -107,7 +104,7 @@ public class components extends util
 		robot.keyRelease(KeyEvent.VK_W);
 	}
 
-	public  void openNewTab() throws AWTException {
+	public void openNewTab() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_T);
@@ -115,19 +112,19 @@ public class components extends util
 		robot.keyRelease(KeyEvent.VK_T);
 	}
 
-	public  void performBackspace() throws AWTException {
+	public void performBackspace() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_BACK_SPACE);
 		robot.keyRelease(KeyEvent.VK_BACK_SPACE);
 	}
 
-	public  void pageRefresh() throws AWTException {
+	public void pageRefresh() throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_F5);
 		robot.keyRelease(KeyEvent.VK_F5);
 	}
 
-	public  void pageZoomOut(int noOfTimes) throws AWTException {
+	public void pageZoomOut(int noOfTimes) throws AWTException {
 		Robot robot = new Robot();
 		for (int i = 0; i < noOfTimes; i++) {
 			robot.keyPress(KeyEvent.VK_CONTROL);
@@ -137,7 +134,7 @@ public class components extends util
 		}
 	}
 
-	public  void pageZoomIn(int noOfTimes) throws AWTException {
+	public void pageZoomIn(int noOfTimes) throws AWTException {
 		Robot robot = new Robot();
 		for (int i = 0; i < noOfTimes; i++) {
 			robot.keyPress(KeyEvent.VK_CONTROL);
