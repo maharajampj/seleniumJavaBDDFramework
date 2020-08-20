@@ -32,3 +32,11 @@ Feature: Verify the landing Page Features
     Examples: 
       | title      |  | sheet     |
       | Contact Us |  | contactus |
+      
+  @TestData
+  Scenario Outline: Verify the Test Data Class
+    Given I have the data
+
+    Examples: 
+      | title      |  | sheet     |
+      | Contact Us |  | contactus |

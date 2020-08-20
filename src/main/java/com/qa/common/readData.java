@@ -5,9 +5,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -68,6 +75,26 @@ public class readData extends util
 		return jsonObj.get(key).toString();
 		
 		
+	}
+	
+	public List<String> getCSVTestData(String coloumnName) throws IOException
+	{
+		List<String> data=new ArrayList<String>();
+		Reader reader = Files.newBufferedReader(Paths.get(resourceCSVTestDataPath));
+		CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withTrim());
+		Map<String, Integer> header = csvParser.getHeaderMap();
+		for (CSVRecord csvRecord : csvParser) 
+		{
+			for(Map.Entry<String, Integer> entry :header.entrySet())
+			{
+				if(entry.getKey().contains(coloumnName))
+				{
+				data.add(csvRecord.get(entry.getValue()));
+				}
+			}
+		}
+
+		return data;
 	}
 	
 

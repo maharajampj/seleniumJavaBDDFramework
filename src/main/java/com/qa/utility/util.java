@@ -13,6 +13,7 @@ public class util {
 	public static String resourceDriverPath = null;
 	public static String resouceExcelTestDataPath = null;
 	public static String resourceJSONTestDataPath = null;
+	public static String resourceCSVTestDataPath=null;
 	public static WebDriver driver;
 	Properties prop = setUp.envSetUp();
 
@@ -20,6 +21,7 @@ public class util {
 		resourceDriverPath = System.getProperty("user.dir") + "//src//main//resources//drivers//";
 		resouceExcelTestDataPath = System.getProperty("user.dir") + "//TestData//Data.xlsx";
 		resourceJSONTestDataPath=System.getProperty("user.dir") + "//TestData//Data.json";
+		resourceCSVTestDataPath=System.getProperty("user.dir") + "//TestData//Data.csv";
 	}
 
 	public WebDriver launchBrowser()

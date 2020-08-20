@@ -39,12 +39,18 @@ public class landingPageSteps
     	Components.loadApp(prop.getProperty("appUrl"));
 
 	}
+	@Given("^I have the data$")
+	public void printTestData() throws IOException, ParseException
+	{
+		System.out.println(data.getExcelTestData("contactUs", "EmailAddress"));
+		System.out.println(data.getJSONTestData("dependencies"));
+		System.out.println(data.getCSVTestData("Name"));
+	}
 	@Then("^I should see the \\\"([^\\\"]*)\\\" title$")
 	public void validateTitle(String title) throws IOException, ParseException 
 	{
 		Components.CompareTitle(title);
-		//System.out.println(data.getExcelTestData("contactUs", "EmailAddress"));
-		//System.out.println(data.getJSONTestData("dependencies"));
+
 	}
 	@Then("^I should navigate to contactUs from$")
 	public void navigateToContactUs()
