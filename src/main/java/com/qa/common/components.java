@@ -59,6 +59,26 @@ public class components extends util {
 		driver.switchTo().window(windows.get(windows.size()-1));
 		//driver.switchTo().window(windows.get(0));
 	}
+	public void switchWindow(String title)
+	{
+		boolean flag=false;
+		List<String> windows=new ArrayList<String>(driver.getWindowHandles());
+		for(String window:windows)
+		{
+			driver.switchTo().window(window);
+			if(driver.getTitle().equals(title))
+			{
+				flag=true;
+				break;
+			}
+
+		}
+		if(flag)
+		{
+			System.out.println("No Such Window Exits : "+title);
+		}
+		
+	}
 
 	public void pressEnter() {
 		try {

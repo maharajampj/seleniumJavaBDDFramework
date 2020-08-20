@@ -51,7 +51,7 @@ public class landingPageSteps
 	{
 		landingPage LandingPage=new landingPage(driver);
 		LandingPage.ClickContactUs();
-		Components.switchLastWindow();
+		Components.switchWindow("WebDriver | Contact U");
 	}
 	@Then("^user should be able to submit the form$")
 	public void validateSuccessForm()
