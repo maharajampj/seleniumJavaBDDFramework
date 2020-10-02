@@ -1,6 +1,7 @@
 package com.qa.stepDefinitions;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import org.json.simple.parser.ParseException;
@@ -30,7 +31,7 @@ public class landingPageSteps
 	@Before()
 	public void launchApp()
 	{
-		driver=Util.launchBrowser();
+		//driver=Util.launchBrowser();
 	}
 
 	@Given("^I am on the landing page$")
@@ -40,11 +41,12 @@ public class landingPageSteps
 
 	}
 	@Given("^I have the data$")
-	public void printTestData() throws IOException, ParseException
+	public void printTestData() throws IOException, ParseException, ClassNotFoundException, SQLException
 	{
-		System.out.println(data.getExcelTestData("contactUs", "EmailAddress"));
-		System.out.println(data.getJSONTestData("dependencies"));
-		System.out.println(data.getCSVTestData("Name"));
+		//System.out.println(data.getExcelTestData("contactUs", "EmailAddress"));
+		//System.out.println(data.getJSONTestData("dependencies"));
+		//System.out.println(data.getCSVTestData("Name"));
+		//data.getDBTestData();
 	}
 	@Then("^I should see the \\\"([^\\\"]*)\\\" title$")
 	public void validateTitle(String title) throws IOException, ParseException 
@@ -70,7 +72,7 @@ public class landingPageSteps
 	@After()
 	public void killApp()
 	{
-		Util.killBrowser();
+		//Util.killBrowser();
 	}
 	
 }

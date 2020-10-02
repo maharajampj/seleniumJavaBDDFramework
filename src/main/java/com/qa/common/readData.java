@@ -8,9 +8,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -24,10 +30,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.qa.utility.setUp;
 import com.qa.utility.util;
 
 public class readData extends util
 {
+	Properties prop=setUp.envSetUp();
 	public List<String> getExcelTestData(String sheetName,String coloumnName) throws IOException
 	{
 		    List<String> list=new ArrayList<String>();
@@ -97,5 +105,28 @@ public class readData extends util
 		return data;
 	}
 	
+	public void getDBTestData() throws ClassNotFoundException, SQLException
+	{
+		try {
+		Class.forName("org.postgresql.Driver");
+		Connection c = null;
+		c = DriverManager.getConnection(prop.getProperty("DBurl"),"htkhrqucenarhm", "99947cb39087b7de3e6beeda294c6368434fc8d82e3d7e4bd15ab580830abee4");
+		Statement stat=c.createStatement();
+		String sql="select * from \"testTable\" tt";
+		ResultSet res=stat.executeQuery(sql);
+		while(res.next())
+		{
+			System.out.println(res.getString("employee_name"));
+		}
+		stat.close();
+		c.close();
+		}
+		catch (Exception e) {
+	         e.printStackTrace();
+	         System.err.println(e.getClass().getName()+": "+e.getMessage());
+	         System.exit(0);
+	      }
+
+	}
 
 }
