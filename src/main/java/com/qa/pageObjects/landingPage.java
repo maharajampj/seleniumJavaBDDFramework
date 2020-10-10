@@ -11,7 +11,7 @@ import com.qa.common.ui;
 public class landingPage 
 {
 
-	 WebDriver driver;
+	 WebDriver driver ;
      ui ui =new ui();
      
 	public landingPage(WebDriver driver) 
