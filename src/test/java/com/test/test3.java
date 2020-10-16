@@ -30,6 +30,13 @@ public class test3 extends base{
        // t.tap(tapOptions().withElement(element(people))).perform();
         t.longPress(longPressOptions().withElement(element(people)).withDuration(ofSeconds(3))).release().perform();
         System.out.println(driver.findElementByAndroidUIAutomator("text(\"Sample menu\")").getText());
+        System.out.println(driver.isDeviceLocked());
+        System.out.println(driver.getCurrentPackage());
+        System.out.println(driver.getAutomationName());
+      //  System.out.println(driver.getBatteryInfo().getLevel());
+
+
+        driver.closeApp();
 
 	}
 

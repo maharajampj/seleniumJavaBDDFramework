@@ -9,12 +9,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.github.javafaker.Faker;
-import com.qa.common.ui;
+import com.qa.common.webUi;
 
 public class contactUsPage 
 {
 	 WebDriver driver;
-      ui ui =new ui();
+      webUi ui =new webUi();
       Faker faker=new Faker();
       
 	public contactUsPage(WebDriver driver) 

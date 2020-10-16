@@ -22,8 +22,9 @@ import org.testng.Assert;
 
 import com.qa.utility.util;
 
-public class components extends util {
-	ui ui = new ui();
+public class webComponents extends util 
+{
+	webUi ui = new webUi();
 
 	public void scrollToElement(WebElement element) {
 		if (ui.isDisplayed(element)) {
@@ -32,7 +33,8 @@ public class components extends util {
 		}
 	}
 
-	public void loadApp(String url) {
+	public void loadApp(String url) 
+	{
 		driver.get(url);
 	}
 

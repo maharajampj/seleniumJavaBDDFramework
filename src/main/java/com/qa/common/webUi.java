@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-public class ui {
+public class webUi {
 	public boolean isDisplayed(WebElement element) {
 		boolean flag = false;
 		try {

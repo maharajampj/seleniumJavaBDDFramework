@@ -1,13 +1,14 @@
-package com.qa.stepDefinitions;
+package com.qa.web.stepDefinitions;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 
-import com.qa.common.components;
+import com.qa.common.webComponents;
 import com.qa.common.readData;
 import com.qa.pageObjects.contactUsPage;
 import com.qa.pageObjects.landingPage;
@@ -23,15 +24,15 @@ public class landingPageSteps
 {
 	Properties prop=setUp.envSetUp();
 	util Util=new util();
-	components Components=new components();
+	webComponents Components=new webComponents();
 	readData data=new readData();
 	WebDriver driver;
 	
 	
 	@Before()
-	public void launchApp()
+	public void launchApp() 
 	{
-		//driver=Util.launchBrowser();
+		driver=Util.launchBrowser();
 	}
 
 	@Given("^I am on the landing page$")
@@ -72,7 +73,7 @@ public class landingPageSteps
 	@After()
 	public void killApp()
 	{
-		//Util.killBrowser();
+		Util.killBrowser();
 	}
 	
 }

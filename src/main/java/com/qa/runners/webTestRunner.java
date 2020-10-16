@@ -11,17 +11,17 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.PickleEventWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
-@CucumberOptions( features = "src/main/resources/com/features",monochrome = true,
+@CucumberOptions( features = "src/main/resources/com/webFeatures",monochrome = true,
 
-glue = { "com.qa.stepDefinitions" },
+glue = { "com.qa.web.stepDefinitions" },
 
-tags = { "@TestData" },
+tags = { "@Test" },
 plugin = {
 
 		"pretty",
 		"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm",
 		})
-public class testRunner 
+public class webTestRunner 
 {
 	public TestNGCucumberRunner testNGCucumberRunner;
 	setUp set=new setUp();

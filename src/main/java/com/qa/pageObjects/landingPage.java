@@ -6,13 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.qa.common.ui;
+import com.qa.common.webUi;
 
 public class landingPage 
 {
 
 	 WebDriver driver ;
-     ui ui =new ui();
+     webUi ui =new webUi();
      
 	public landingPage(WebDriver driver) 
 	{
