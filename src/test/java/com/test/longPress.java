@@ -16,7 +16,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.TapOptions;
 import static java.time.Duration.ofSeconds;
 
-public class test3 extends base{
+public class longPress extends base{
 
 	public static void main(String[] args) throws MalformedURLException 
 	{

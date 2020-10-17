@@ -14,7 +14,7 @@ import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static java.time.Duration.ofSeconds;
 
 
-public class test5 extends base{
+public class scroll extends base{
 
 	public static void main(String[] args) throws MalformedURLException 
 	{

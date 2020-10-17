@@ -22,8 +22,8 @@ public class dragAndDrop extends base{
 		
 		driver.findElementByAndroidUIAutomator("text(\"Views\")").click();
 		driver.findElementByAndroidUIAutomator("text(\"Drag and Drop\")").click();
-		WebElement source=driver.findElementsByClassName("android.view.View").get(0);
-		WebElement dest=driver.findElementsByClassName("android.view.View").get(1);
+		AndroidElement source=driver.findElementByXPath("//*[@resource-id='io.appium.android.apis:id/drag_dot_1']");
+		AndroidElement dest=driver.findElementByXPath("//*[@resource-id='io.appium.android.apis:id/drag_dot_3']");
 		TouchAction t = new TouchAction(driver);
 		t.longPress(longPressOptions().withElement(element(source))).moveTo(element(dest)).release().perform();
 		//t.longPress(element(source)).moveTo(element(dest)).release().perform();
