@@ -10,6 +10,7 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -95,7 +96,11 @@ public class util {
 			    driver.manage().window().maximize();
 			}
 			break;
-
+		case "firefox":
+			System.setProperty("webdriver.gecko.driver",resourceDriverPath+"geckodriver.exe");
+			driver=new FirefoxDriver();
+		    driver.manage().window().maximize();
+		    break;
 		   default:
 			System.out.println("Browser not found");
 			break;
@@ -104,7 +109,7 @@ public class util {
 			return driver;
 		}
 
-	public AndroidDriver launchDevice() throws MalformedURLException
+	public AndroidDriver<AndroidElement> launchDevice() throws MalformedURLException
 	{
 		String platform=prop.getProperty("platform");
 		String serverUrl=prop.getProperty("serverUrl");
@@ -113,7 +118,8 @@ public class util {
 		String automationName=prop.getProperty("automationName");
 		String appPackage=prop.getProperty("appPackage");
 		String appActivity=prop.getProperty("appActivity");
-		if(platform.equals("mobile"))
+		String mobileBrowser=prop.getProperty("mobileBrowser");
+		if(platform.equals("mobile")&&mobileBrowser.equals("nativeApp"))
 		{
 			URL url=new URL(serverUrl);
 			DesiredCapabilities cap=new DesiredCapabilities();
@@ -125,6 +131,16 @@ public class util {
 			cap.setCapability("appActivity", appActivity);
 			androidDriver = new AndroidDriver<>(url,cap);
 			
+		}
+		else if(platform.equals("mobile")&&mobileBrowser.equals("chrome"))
+		{
+			URL url=new URL(serverUrl);
+			DesiredCapabilities cap=new DesiredCapabilities();
+			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+			cap.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+			androidDriver = new AndroidDriver<>(url,cap);
 		}
 		return androidDriver;
 	}

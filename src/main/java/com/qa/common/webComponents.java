@@ -26,7 +26,8 @@ public class webComponents extends util
 {
 	webUi ui = new webUi();
 
-	public void scrollToElement(WebElement element) {
+	public void scrollToElement(WebElement element)
+	{
 		if (ui.isDisplayed(element)) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(true);", element);
