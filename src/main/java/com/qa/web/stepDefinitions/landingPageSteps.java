@@ -10,10 +10,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.qa.common.webComponents;
 import com.qa.common.readData;
-import com.qa.pageObjects.contactUsPage;
-import com.qa.pageObjects.landingPage;
 import com.qa.utility.setUp;
 import com.qa.utility.util;
+import com.qa.web.pageObjects.contactUsPage;
+import com.qa.web.pageObjects.landingPage;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

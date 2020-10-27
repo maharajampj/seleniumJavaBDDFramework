@@ -1,13 +1,19 @@
 package com.qa.common;
 
+import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
+
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
 
 public class mobileUi 
 {
-	public boolean isDisplayed(AndroidElement element) {
+	public boolean isDisplayed(WebElement element) {
 		boolean flag = false;
 		try {
 			flag = element.isDisplayed();
@@ -37,13 +43,13 @@ public class mobileUi
 		return flag;
 	}
 
-	public void click(AndroidElement element) {
+	public void click(WebElement element) {
 		if (isDisplayed(element)) {
 			element.click();
 		}
 	}
 
-	public void sendKeys(AndroidElement element, String txt) {
+	public void sendKeys(WebElement element, String txt) {
 		if (isDisplayed(element)) {
 			element.sendKeys(txt);
 		}
@@ -82,6 +88,9 @@ public class mobileUi
 		}
 		
 		return temp;
-	}
+	
+	
 
+
+}
 }

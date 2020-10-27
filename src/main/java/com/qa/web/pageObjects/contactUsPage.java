@@ -1,4 +1,4 @@
-package com.qa.pageObjects;
+package com.qa.web.pageObjects;
 
 import java.util.Random;
 

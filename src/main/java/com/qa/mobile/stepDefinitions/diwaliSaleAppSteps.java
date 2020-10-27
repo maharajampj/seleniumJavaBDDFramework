@@ -9,11 +9,12 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 
 import com.qa.common.webComponents;
+import com.qa.mobile.pageObjects.landingPage;
 import com.qa.common.readData;
-import com.qa.pageObjects.contactUsPage;
-import com.qa.pageObjects.landingPage;
 import com.qa.utility.setUp;
 import com.qa.utility.util;
+import com.qa.web.pageObjects.contactUsPage;
+
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -22,7 +23,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class demoAppSteps 
+public class diwaliSaleAppSteps 
 {
 	Properties prop=setUp.envSetUp();
 	util Util=new util();
@@ -48,10 +49,23 @@ public class demoAppSteps
 		
 	}
 
+	@Then("^I should move to Register Page$")
+	public void clickRegister() throws InterruptedException
+	{
+		landingPage landingpage=new landingPage(androidDriver);
+		landingpage.clickRegister();
+	}
+	@Then("I should fill {string} and {string} and {string} and {string}")
+	public void registerForm(String name, String email, String password, String phno)
+	{
+		landingPage landingpage=new landingPage(androidDriver);
+		landingpage.submitRegistration(name, email, password, phno);
+
+	}
 	@After()
 	public void killApp()
 	{
-		Util.killDevice();
+		//Util.killDevice();
 	}
 	
 }

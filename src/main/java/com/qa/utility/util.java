@@ -124,7 +124,7 @@ public class util {
 			URL url=new URL(serverUrl);
 			DesiredCapabilities cap=new DesiredCapabilities();
 			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, deviceVersion);
+			//cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, deviceVersion);
 			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
 			cap.setCapability("appPackage", appPackage);

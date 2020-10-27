@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="com.qa.runners.webTestRunner"/>
+      <class name="com.qa.runners.mobileTestRunner"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
