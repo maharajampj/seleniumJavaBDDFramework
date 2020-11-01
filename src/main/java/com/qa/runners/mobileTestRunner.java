@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.PickleEventWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
-@CucumberOptions( features = "src/main/resources/com/mobileFeatures",monochrome = true,
+@CucumberOptions( features = "src/main/resources/com/mobileFeatures/store.feature",monochrome = true,
 
 glue = { "com.qa.mobile.stepDefinitions" },
 

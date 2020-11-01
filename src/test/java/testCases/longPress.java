@@ -1,4 +1,4 @@
-package com.test;
+package testCases;
 
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;

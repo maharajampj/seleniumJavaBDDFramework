@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
@@ -54,5 +55,10 @@ public class mobileComponents extends util {
 		TouchAction t=new TouchAction(androidDriver);
 		t.longPress(longPressOptions().withElement(element(source)).withDuration(ofSeconds(2))).moveTo(element(dest)).release().perform();
 		
+	}
+	public String getToastMessage()
+	{
+		String toastMessage=driver.findElement(By.xpath("//android.widget.Toast[1]")).getAttribute("name");
+		return toastMessage;
 	}
 }

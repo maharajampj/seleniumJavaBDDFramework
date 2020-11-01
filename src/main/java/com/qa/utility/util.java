@@ -118,6 +118,7 @@ public class util {
 		String automationName=prop.getProperty("automationName");
 		String appPackage=prop.getProperty("appPackage");
 		String appActivity=prop.getProperty("appActivity");
+		String appPath=prop.getProperty("appPath");
 		String mobileBrowser=prop.getProperty("mobileBrowser");
 		if(platform.equals("mobile")&&mobileBrowser.equals("nativeApp"))
 		{
@@ -129,7 +130,8 @@ public class util {
 			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
 			cap.setCapability("appPackage", appPackage);
 			cap.setCapability("appActivity", appActivity);
-			androidDriver = new AndroidDriver<>(url,cap);
+			//cap.setCapability(MobileCapabilityType.APP, appPath);
+			androidDriver = new AndroidDriver<AndroidElement>(url,cap);
 			
 		}
 		else if(platform.equals("mobile")&&mobileBrowser.equals("chrome"))
@@ -140,7 +142,7 @@ public class util {
 			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
 			cap.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-			androidDriver = new AndroidDriver<>(url,cap);
+			androidDriver = new AndroidDriver<AndroidElement>(url,cap);
 		}
 		return androidDriver;
 	}

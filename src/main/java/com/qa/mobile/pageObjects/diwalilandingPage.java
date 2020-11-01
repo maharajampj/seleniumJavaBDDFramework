@@ -13,13 +13,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.cucumber.java.en.Then;
 
-public class landingPage 
+public class diwalilandingPage 
 {
 
 	 AndroidDriver<AndroidElement> androidDriver ;
      mobileUi ui =new mobileUi();
      
-	public landingPage(AndroidDriver<AndroidElement> androiddriver) 
+	public diwalilandingPage(AndroidDriver<AndroidElement> androiddriver) 
 	{
 		this.androidDriver=androiddriver;
 		PageFactory.initElements(androiddriver, this);

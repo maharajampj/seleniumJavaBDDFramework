@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.qa.common.webComponents;
 import com.qa.mobile.pageObjects.diwalilandingPage;
+import com.qa.mobile.pageObjects.storelandingPage;
 import com.qa.common.readData;
 import com.qa.utility.setUp;
 import com.qa.utility.util;
@@ -23,7 +24,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class diwaliSaleAppSteps 
+public class storeSteps 
 {
 	Properties prop=setUp.envSetUp();
 	util Util=new util();
@@ -38,30 +39,18 @@ public class diwaliSaleAppSteps
 		androidDriver=Util.launchDevice();
 	}
 
-	@Given("^I am on the device$")
+	@Given("^I am on the App$")
 	public void OpenAPP()
 	{
 		
 	}
-	@Then("^I should see app loaded$")
+	@Then("^I should submit the form$")
 	public void validateApp()
 	{
-		
+		storelandingPage landingPage=new storelandingPage(androidDriver);
+		landingPage.shoppingFormSubmission();
 	}
 
-	@Then("^I should move to Register Page$")
-	public void clickRegister() throws InterruptedException
-	{
-		diwalilandingPage landingpage=new diwalilandingPage(androidDriver);
-		landingpage.clickRegister();
-	}
-	@Then("I should fill {string} and {string} and {string} and {string}")
-	public void registerForm(String name, String email, String password, String phno)
-	{
-		diwalilandingPage landingpage=new diwalilandingPage(androidDriver);
-		landingpage.submitRegistration(name, email, password, phno);
-
-	}
 	@After()
 	public void killApp()
 	{

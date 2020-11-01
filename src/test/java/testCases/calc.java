@@ -1,4 +1,4 @@
-package com.test;
+package testCases;
 
 import java.net.MalformedURLException;
 
