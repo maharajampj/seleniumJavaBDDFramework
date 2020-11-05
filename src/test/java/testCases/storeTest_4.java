@@ -9,7 +9,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
-public class storeTest_3 extends base {
+public class storeTest_4 extends base {
 	public static void main(String[] args) throws MalformedURLException {
 		AndroidDriver<AndroidElement> driver = base.main();
 
@@ -34,33 +34,23 @@ public class storeTest_3 extends base {
 
 		driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
 
-		driver.findElement(MobileBy.AndroidUIAutomator(
-				"new UiScrollable(new UiSelector().resourceId(\"com.androidsample.generalstore:id/rvProductList\")).scrollIntoView(new UiSelector().textMatches(\"Jordan 6 Rings\").instance(0))"));
+		
+       driver.findElements(By.xpath("//*[@text='ADD TO CART']")).get(0).click();
+       driver.findElements(By.xpath("//*[@text='ADD TO CART']")).get(0).click();
+       driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
 
-		int count = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).size();
+		
+       String amount1=driver.findElements(By.id("com.androidsample.generalstore:id/productPrice")).get(0).getText().substring(1);
+       String amount2=driver.findElements(By.id("com.androidsample.generalstore:id/productPrice")).get(1).getText().substring(1);
+       
+       double itemtotal=Double.parseDouble(amount1)+Double.parseDouble(amount2);
+		
+       String billtotal=driver.findElement(By.id("com.androidsample.generalstore:id/totalAmountLbl")).getText().substring(1);
+       
+       System.out.println(itemtotal+"  "+billtotal);
+		
 
-		for (int i = 0; i < count; i++)
-
-		{
-
-			String text = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).get(i).getText();
-
-			if (text.equalsIgnoreCase("Jordan 6 Rings"))
-
-			{
-
-				driver.findElements(By.id("com.androidsample.generalstore:id/productAddCart")).get(i).click();
-
-				break;
-
-			}
-
-		}
-
-		driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
-
-		String lastpageText = driver.findElement(By.id("com.androidsample.generalstore:id/productName")).getText();
-		System.out.println(lastpageText);
+		
 
 	}
 }
