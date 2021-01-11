@@ -1,5 +1,7 @@
 package com.qa.utility;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -8,6 +10,12 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 public class util {
 	public static String resourceDriverPath = null;
@@ -15,6 +23,7 @@ public class util {
 	public static String resourceJSONTestDataPath = null;
 	public static String resourceCSVTestDataPath=null;
 	public static WebDriver driver;
+	public static AndroidDriver<AndroidElement> androidDriver ;
 	Properties prop = setUp.envSetUp();
 
 	public util() {
@@ -24,11 +33,14 @@ public class util {
 		resourceCSVTestDataPath=System.getProperty("user.dir") + "//TestData//Data.csv";
 	}
 
-	public WebDriver launchBrowser()
+	public WebDriver launchBrowser() 
 	{		
 		String browser=prop.getProperty("browser");
 		String emulator=prop.getProperty("emulator");
-
+		String platform=prop.getProperty("platform");
+		
+		if(platform.equals("desktop"))
+		{
 		switch (browser) 
 		{
 		case "chrome":
@@ -84,15 +96,62 @@ public class util {
 			    driver.manage().window().maximize();
 			}
 			break;
-
+		case "firefox":
+			System.setProperty("webdriver.gecko.driver",resourceDriverPath+"geckodriver.exe");
+			driver=new FirefoxDriver();
+		    driver.manage().window().maximize();
+		    break;
 		   default:
 			System.out.println("Browser not found");
 			break;
 		}
+		}
 			return driver;
 		}
 
-	public void killBrowser() {
+	public AndroidDriver<AndroidElement> launchDevice() throws MalformedURLException
+	{
+		String platform=prop.getProperty("platform");
+		String serverUrl=prop.getProperty("serverUrl");
+		String deviceVersion=prop.getProperty("deviceVersion");
+		String deviceName=prop.getProperty("deviceName");
+		String automationName=prop.getProperty("automationName");
+		String appPackage=prop.getProperty("appPackage");
+		String appActivity=prop.getProperty("appActivity");
+		String appPath=prop.getProperty("appPath");
+		String mobileBrowser=prop.getProperty("mobileBrowser");
+		if(platform.equals("mobile")&&mobileBrowser.equals("nativeApp"))
+		{
+			URL url=new URL(serverUrl);
+			DesiredCapabilities cap=new DesiredCapabilities();
+			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+			//cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, deviceVersion);
+			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+			cap.setCapability("appPackage", appPackage);
+			cap.setCapability("appActivity", appActivity);
+			//cap.setCapability(MobileCapabilityType.APP, appPath);
+			androidDriver = new AndroidDriver<AndroidElement>(url,cap);
+			
+		}
+		else if(platform.equals("mobile")&&mobileBrowser.equals("chrome"))
+		{
+			URL url=new URL(serverUrl);
+			DesiredCapabilities cap=new DesiredCapabilities();
+			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+			cap.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+			androidDriver = new AndroidDriver<AndroidElement>(url,cap);
+		}
+		return androidDriver;
+	}
+	public void killDevice()
+	{
+		androidDriver.closeApp();
+	}
+	public void killBrowser() 
+	{
 		driver.quit();
 	}
 
