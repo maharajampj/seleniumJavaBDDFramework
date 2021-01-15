@@ -15,7 +15,7 @@ import io.cucumber.testng.TestNGCucumberRunner;
 
 glue = { "com.qa.web.stepDefinitions" },
 
-tags = { "@Test" },
+tags = { "@ImageTest" },
 plugin = {
 
 		"pretty",

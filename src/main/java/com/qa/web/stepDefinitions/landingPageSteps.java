@@ -36,9 +36,10 @@ public class landingPageSteps
 	}
 
 	@Given("^I am on the landing page$")
-	public void launchLandingPage()
+	public void launchLandingPage() throws InterruptedException
 	{
     	Components.loadApp(prop.getProperty("appUrl"));
+    	Thread.sleep(2000);
 
 	}
 	@Given("^I have the data$")
@@ -70,6 +71,12 @@ public class landingPageSteps
 		ContactUsPage.ValidateSuccessSubmission();
 	}
 
+	@Then("I should compare the page with {string}")
+	public void validateUI(String path) throws IOException
+	{
+		Components.compareImage("");
+	}
+	
 	@After()
 	public void killApp()
 	{

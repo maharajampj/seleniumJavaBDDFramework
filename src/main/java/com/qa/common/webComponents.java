@@ -3,6 +3,7 @@ package com.qa.common;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.tree.RowMapper;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -21,6 +23,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.qa.utility.util;
+
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 public class webComponents extends util 
 {
@@ -174,4 +180,14 @@ public class webComponents extends util
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 	}
+	public void compareImage(String path) throws IOException
+	{
+		Screenshot img1=new AShot().takeScreenshot(driver);
+		System.out.println(System.getProperty("user.dir"));
+		ImageIO.write(img1.getImage(), "png", new File(System.getProperty("user.dir")+"\\src\\main\\resources\\imageReference\\sc1.jpeg"));
+		//BufferedImage img2=ImageIO.read(new File(System.getProperty("user.dir")+"main\\resources\\imageReference\\sc1.jpeg"));
+		//ImageDiffer imageDiff=new ImageDiffer();
+		
+	}
+	
 }
