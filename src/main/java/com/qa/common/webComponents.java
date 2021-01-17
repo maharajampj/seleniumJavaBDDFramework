@@ -26,7 +26,9 @@ import com.qa.utility.util;
 
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class webComponents extends util 
 {
@@ -182,11 +184,29 @@ public class webComponents extends util
 	}
 	public void compareImage(String path) throws IOException
 	{
-		Screenshot img1=new AShot().takeScreenshot(driver);
-		System.out.println(System.getProperty("user.dir"));
-		ImageIO.write(img1.getImage(), "png", new File(System.getProperty("user.dir")+"\\src\\main\\resources\\imageReference\\sc1.jpeg"));
-		//BufferedImage img2=ImageIO.read(new File(System.getProperty("user.dir")+"main\\resources\\imageReference\\sc1.jpeg"));
-		//ImageDiffer imageDiff=new ImageDiffer();
+		String referenceImagePath=System.getProperty("user.dir")+"\\src\\main\\resources\\imageReference\\";
+		System.out.println(referenceImagePath+path);
+		BufferedImage expectedImg=ImageIO.read(new File(referenceImagePath+path));
+		
+		Screenshot sc = new AShot().takeScreenshot(driver);		
+		BufferedImage actualImg=sc.getImage();
+		ImageIO.write(actualImg, "png", new File(referenceImagePath+"actual.png"));
+
+		ImageDiffer imageDiff=new ImageDiffer();
+		ImageDiff diff=imageDiff.makeDiff(expectedImg, actualImg);	
+		System.out.println(diff.getDiffSize());
+		if(diff.hasDiff()==true)
+		{
+			System.out.println("Images are not matching");
+		BufferedImage diffImage1=diff.getMarkedImage();
+		ImageIO.write(diffImage1, "png", new File(referenceImagePath+"diffMarkedImg.png"));
+		BufferedImage diffImage2=diff.getTransparentMarkedImage();
+		ImageIO.write(diffImage2, "png", new File(referenceImagePath+"diffTransparentMarkedImg.png"));
+		}
+		else
+		{
+			System.out.println("Images are matching");
+		}
 		
 	}
 	
