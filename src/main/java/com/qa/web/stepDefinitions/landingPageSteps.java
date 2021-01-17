@@ -74,7 +74,7 @@ public class landingPageSteps
 	@Then("I should compare the page with {string}")
 	public void validateUI(String path) throws IOException
 	{
-		Components.compareImage("");
+		Components.compareImage(path);
 	}
 	
 	@After()

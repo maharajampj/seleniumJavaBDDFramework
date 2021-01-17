@@ -33,18 +33,12 @@ Feature: Verify the landing Page Features
       | title      |  | sheet     |
       | Contact Us |  | contactus |
       
-        @TestData
+        @ImageTest
   Scenario Outline: Verify the landing page UI
-    Given I am on the landing page
-    Then I have the data
-
-    Examples: 
-      | title      |  | sheet     |
-      | Contact Us |  | contactus |
-  @ImageTest
-  Scenario Outline: Verify the Test Data Class
-    Given I have the data
+  	Given I am on the landing page
     Then I should compare the page with "<baseline>"
     Examples:
     |baseline|
-    |landingPage.jpeg|
+    |landingPage.png|
+
+
