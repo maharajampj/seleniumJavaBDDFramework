@@ -22,6 +22,7 @@ public class util {
 	public static String resouceExcelTestDataPath = null;
 	public static String resourceJSONTestDataPath = null;
 	public static String resourceCSVTestDataPath=null;
+	public static String resourceappPath=null;
 	public static WebDriver driver;
 	public static AndroidDriver<AndroidElement> androidDriver ;
 	Properties prop = setUp.envSetUp();
@@ -31,6 +32,7 @@ public class util {
 		resouceExcelTestDataPath = System.getProperty("user.dir") + "//TestData//Data.xlsx";
 		resourceJSONTestDataPath=System.getProperty("user.dir") + "//TestData//Data.json";
 		resourceCSVTestDataPath=System.getProperty("user.dir") + "//TestData//Data.csv";
+		resourceappPath=System.getProperty("user.dir")+"//src//main//resources//apps//";
 	}
 
 	public WebDriver launchBrowser() 
@@ -118,7 +120,7 @@ public class util {
 		String automationName=prop.getProperty("automationName");
 		String appPackage=prop.getProperty("appPackage");
 		String appActivity=prop.getProperty("appActivity");
-		String appPath=prop.getProperty("appPath");
+		String appName=prop.getProperty("appName");
 		String mobileBrowser=prop.getProperty("mobileBrowser");
 		if(platform.equals("mobile")&&mobileBrowser.equals("nativeApp"))
 		{
@@ -128,10 +130,25 @@ public class util {
 			//cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, deviceVersion);
 			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 			cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+			if(appPackage==null&&appActivity==null)
+			{
+				if(appName==null)
+				{
+					System.out.println("No Such App exists");
+				}
+				else
+				{
+				cap.setCapability(MobileCapabilityType.APP, resourceappPath+appName);
+				}
+			}
+			else
+			{
 			cap.setCapability("appPackage", appPackage);
 			cap.setCapability("appActivity", appActivity);
-			//cap.setCapability(MobileCapabilityType.APP, appPath);
+			}
+			
 			androidDriver = new AndroidDriver<AndroidElement>(url,cap);
+			androidDriver.unlockDevice();
 			
 		}
 		else if(platform.equals("mobile")&&mobileBrowser.equals("chrome"))

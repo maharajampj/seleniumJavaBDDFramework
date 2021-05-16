@@ -42,7 +42,7 @@ public class storeSteps
 		androidDriver=Util.launchDevice();
 	}
 
-	@Given("^I am on the App$")
+	@Given("^I am on the Appa$")
 	public void OpenAPP()
 	{
 		

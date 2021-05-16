@@ -1,6 +1,8 @@
 package com.qa.services;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Properties;
 
 import com.qa.utility.setUp;
@@ -27,14 +29,36 @@ public class appiumService
        // environment.put("PATH", "/usr/local/bin:" + System.getenv("PATH"));
         //serviceBuilder.withEnvironment(environment);
 		server = AppiumDriverLocalService.buildService(serviceBuilder);
+		if(!checkIfServerIsRunnning(Integer.parseInt(prop.getProperty("port"))))
+		{
         server.start();
-        System.out.println("Appium Driver Started");
+        System.out.println("Appium Server Started");
+		}
+		else
+		{
+			System.out.println("Appium Server already Running");
+		}
 		}
 		catch(Exception e)
 		{
-			System.out.println("AutoStart for Appium Failed " +e.getMessage());
+			System.out.println("AutoStart  Appium Server Failed " +e.getMessage());
 		}
 		
+	}
+	public boolean checkIfServerIsRunnning(int port) {
+
+	    boolean isServerRunning = false;
+	    ServerSocket serverSocket;
+	    try {
+	        serverSocket = new ServerSocket(port);
+	        serverSocket.close();
+	    } catch (IOException e) {
+	        
+	        isServerRunning = true;
+	    } finally {
+	        serverSocket = null;
+	    }
+	    return isServerRunning;
 	}
 	public void stopAppiumServer()
 	{
