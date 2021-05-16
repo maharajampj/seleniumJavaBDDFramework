@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.qa.common.webComponents;
 import com.qa.mobile.pageObjects.diwalilandingPage;
 import com.qa.mobile.pageObjects.storelandingPage;
+import com.qa.services.appiumService;
 import com.qa.common.readData;
 import com.qa.utility.setUp;
 import com.qa.utility.util;
@@ -31,11 +32,13 @@ public class storeSteps
 	webComponents Components=new webComponents();
 	readData data=new readData();
 	AndroidDriver<AndroidElement> androidDriver;
+	appiumService appium=new appiumService();
 	
 	
 	@Before()
 	public void launchDevice() throws MalformedURLException
 	{
+		appium.startAppiumServer();
 		androidDriver=Util.launchDevice();
 	}
 
@@ -54,7 +57,9 @@ public class storeSteps
 	@After()
 	public void killApp()
 	{
-		//Util.killDevice();
+		
+		Util.killDevice();
+		appium.stopAppiumServer();
 	}
 	
 }
